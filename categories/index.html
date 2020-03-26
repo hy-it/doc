@@ -5,19 +5,17 @@
   
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>接口设计规范 | Hexo</title>
+  <link rel="dns-prefetch" href="http://hy-it.github.io">
+  <title>文章分类 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一 基本规范1.1 公共请求参数   参数名称 说明 备注    appVersion APP的版本号 格式为:xx.xx.xx  例如：2.10.12   osVersion 操作系统版本号 例如：13.3   firstChannel 一级渠道 苹果&#x2F;android&#x2F;wap&#x2F;微信小程序&#x2F;支付宝小程序   secondChannel 二级渠道 例如：华为&#x2F;小米&#x2F;OPPO&#x2F;vivo&#x2F;   devi">
-<meta property="og:type" content="article">
-<meta property="og:title" content="接口设计规范">
-<meta property="og:url" content="http://yoursite.com/2020/03/25/hello-world/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="文章分类">
+<meta property="og:url" content="http://hy-it.github.io/categories/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="一 基本规范1.1 公共请求参数   参数名称 说明 备注    appVersion APP的版本号 格式为:xx.xx.xx  例如：2.10.12   osVersion 操作系统版本号 例如：13.3   firstChannel 一级渠道 苹果&#x2F;android&#x2F;wap&#x2F;微信小程序&#x2F;支付宝小程序   secondChannel 二级渠道 例如：华为&#x2F;小米&#x2F;OPPO&#x2F;vivo&#x2F;   devi">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-03-25T09:56:51.789Z">
-<meta property="article:modified_time" content="2020-03-26T07:08:52.130Z">
-<meta property="article:author" content="John Doe">
+<meta property="article:published_time" content="2020-03-26T07:28:58.000Z">
+<meta property="article:modified_time" content="2020-03-26T07:30:06.397Z">
+<meta property="article:author" content="Allen">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -50,7 +48,7 @@
 			<img src="" class="js-avatar">
 		</a>
 		<hgroup>
-		  <h1 class="header-author"><a href="/">John Doe</a></h1>
+		  <h1 class="header-author"><a href="/">Allen</a></h1>
 		</hgroup>
 		
 
@@ -108,7 +106,7 @@
 				<img src="" class="js-avatar">
 			</div>
 			<hgroup>
-			  <h1 class="header-author js-header-author">John Doe</h1>
+			  <h1 class="header-author js-header-author">Allen</h1>
 			</hgroup>
 			
 			
@@ -154,168 +152,27 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-hello-world" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="page-" class="article article-type-page " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      接口设计规范
+      文章分类
     </h1>
   
 
         
-        <a href="/2020/03/25/hello-world/" class="archive-article-date">
-  	<time datetime="2020-03-25T09:56:51.789Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-25</time>
+        <a href="/categories/index.html" class="archive-article-date">
+  	<time datetime="2020-03-26T07:28:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-26</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="一-基本规范"><a href="#一-基本规范" class="headerlink" title="一 基本规范"></a>一 基本规范</h3><h4 id="1-1-公共请求参数"><a href="#1-1-公共请求参数" class="headerlink" title="1.1 公共请求参数"></a>1.1 公共请求参数</h4><table>
-<thead>
-<tr>
-<th>参数名称</th>
-<th>说明</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>appVersion</td>
-<td>APP的版本号</td>
-<td>格式为:xx.xx.xx  例如：2.10.12</td>
-</tr>
-<tr>
-<td>osVersion</td>
-<td>操作系统版本号</td>
-<td>例如：13.3</td>
-</tr>
-<tr>
-<td>firstChannel</td>
-<td>一级渠道</td>
-<td>苹果/android/wap/微信小程序/支付宝小程序</td>
-</tr>
-<tr>
-<td>secondChannel</td>
-<td>二级渠道</td>
-<td>例如：华为/小米/OPPO/vivo/</td>
-</tr>
-<tr>
-<td>deviceModel</td>
-<td>设备型号</td>
-<td>例如：Meta20/Mi8/   等</td>
-</tr>
-<tr>
-<td>deviceToken</td>
-<td>设备唯一标示</td>
-<td>例如：xxxxxxx-xxxxx-xxxx-xxxxxx-xxxxx</td>
-</tr>
-</tbody></table>
-<h4 id="1-2-URL规范"><a href="#1-2-URL规范" class="headerlink" title="1.2 URL规范"></a>1.2 URL规范</h4><h5 id="1-2-1-path路径格式"><a href="#1-2-1-path路径格式" class="headerlink" title="1.2.1 path路径格式"></a>1.2.1 path路径格式</h5><ul>
-<li>https://域名/api/服务名/一级目录/二级目录/方法名</li>
-</ul>
-<h5 id="1-2-2-method方法规范"><a href="#1-2-2-method方法规范" class="headerlink" title="1.2.2 method方法规范"></a>1.2.2 method方法规范</h5><table>
-<thead>
-<tr>
-<th>方法类型</th>
-<th>method</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>查找</td>
-<td>GET</td>
-<td>getXXX</td>
-</tr>
-<tr>
-<td>新增</td>
-<td>POST</td>
-<td>createXXX/submitXXX</td>
-</tr>
-<tr>
-<td>修改</td>
-<td>POST</td>
-<td>updateXXX</td>
-</tr>
-<tr>
-<td>删除</td>
-<td>POST</td>
-<td>delXXX</td>
-</tr>
-</tbody></table>
-<h5 id="1-2-3-注意事项"><a href="#1-2-3-注意事项" class="headerlink" title="1.2.3 注意事项"></a>1.2.3 注意事项</h5><ul>
-<li>GET请求参数放在URL中传递，POST请求放在Body体中传递</li>
-</ul>
-<h4 id="1-3-字段命名规范"><a href="#1-3-字段命名规范" class="headerlink" title="1.3 字段命名规范"></a>1.3 字段命名规范</h4><ul>
-<li>驼峰命名法</li>
-<li>常量字段大小下划线隔开</li>
-<li>不要使用缩写（userAddress 非uAddress）<h4 id="二-响应数据规范"><a href="#二-响应数据规范" class="headerlink" title="二 响应数据规范"></a>二 响应数据规范</h4></li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>字段</th>
-<th>类型</th>
-<th>说明</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>code</td>
-<td>string</td>
-<td>返回结果码</td>
-<td>成功：200</td>
-</tr>
-<tr>
-<td>message</td>
-<td>string</td>
-<td>显示提示信息</td>
-<td>用户提示的信息</td>
-</tr>
-<tr>
-<td>traceMessage</td>
-<td>string</td>
-<td>跟踪信息</td>
-<td>异常信息，错误信息堆栈跟踪</td>
-</tr>
-<tr>
-<td>data</td>
-<td>string</td>
-<td>数据实体</td>
-<td>响应实体，JSON格式</td>
-</tr>
-</tbody></table>
-<ul>
-<li>data采用JSON格式，数据列表对象建议携带list或者array后缀，便于前端识别解析<h5 id="建议"><a href="#建议" class="headerlink" title="建议"></a>建议</h5></li>
-<li>使用String作为字段类型，容错性强</li>
-<li>布尔类型使用特定字符转换，减少NULL判断</li>
-<li>时间字段String展示</li>
-<li>金额字段根据精度要求乘以100或者乘以1000把浮点数变为整数</li>
-</ul>
-<h3 id="三-安全性"><a href="#三-安全性" class="headerlink" title="三 安全性"></a>三 安全性</h3><h4 id="3-1-数据安全性"><a href="#3-1-数据安全性" class="headerlink" title="3.1 数据安全性"></a>3.1 数据安全性</h4><ul>
-<li>响应数据用户的隐私数据要脱敏(例如：姓名/手机号/身份证号/住址)</li>
-<li>关键请求参数用的敏感字段要加密处理（例如：登录密码/支付密码）</li>
-<li>反爬监控与反爬策略<h4 id="3-2-服务安全性"><a href="#3-2-服务安全性" class="headerlink" title="3.2 服务安全性"></a>3.2 服务安全性</h4></li>
-<li>使用签名检验</li>
-<li>黑白名单策略（基于IP，手机号，设备等）</li>
-<li>限流降级策略</li>
-<li>常规安全加固（SQL注入/XSS/CSRF等）<h3 id="四-性能规范要求"><a href="#四-性能规范要求" class="headerlink" title="四 性能规范要求"></a>四 性能规范要求</h3><h4 id="4-1接口聚合"><a href="#4-1接口聚合" class="headerlink" title="4.1接口聚合"></a>4.1接口聚合</h4></li>
-<li>多个接口可以提供聚合接口一次请求完成数据加载避免多次接口请求引起不必要的网络消耗<h4 id="4-2-网络检测"><a href="#4-2-网络检测" class="headerlink" title="4.2 网络检测"></a>4.2 网络检测</h4></li>
-<li>WI-FI/4G调用的大流量接口，在3G网络下切换降级<h3 id="4-3-兼容性"><a href="#4-3-兼容性" class="headerlink" title="4.3 兼容性"></a>4.3 兼容性</h3></li>
-<li>接口入参数采用对象传参</li>
-<li>文案和提示信息支持动态配置</li>
-<li>接口返回字段只能新增，不能修改和删除，类型也不能修改</li>
-<li>新接口兼容老接口，老接口根据流量监控逐步淘汰</li>
-</ul>
-<h3 id="五-客户端规范"><a href="#五-客户端规范" class="headerlink" title="五 客户端规范"></a>五 客户端规范</h3><ul>
-<li>客户端只负责UI逻辑展示和用户行为交互，尽量不处理业务逻辑</li>
-<li>金额计算也不处理，有后端统一返回</li>
-<li>客户单的检验规则可以根据服务端的下发规则进行校验<h3 id="六-服务端规范"><a href="#六-服务端规范" class="headerlink" title="六 服务端规范"></a>六 服务端规范</h3></li>
-<li>后端接口聚合层，只做数据聚合/剪裁/透传等</li>
-</ul>
-
+        
       
 
       
@@ -394,7 +251,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/03/25/hello-world/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://hy-it.github.io/categories/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -443,7 +300,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2020 John Doe
+    		&copy; 2020 Allen
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -456,7 +313,7 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
