@@ -366,6 +366,90 @@
 
 
   
+    <article id="post-mybatis-lesson-1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/03/26/mybatis-lesson-1/">mybatis 源码学习一 （SqlSession和SqlSessionFactory）</a>
+    </h1>
+  
+
+        
+        <a href="/2020/03/26/mybatis-lesson-1/" class="archive-article-date">
+  	<time datetime="2020-03-26T07:28:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-SqlSession"><a href="#1-SqlSession" class="headerlink" title="1.SqlSession"></a>1.SqlSession</h3><ul>
+<li>数据库的CRUD操作的核心接口类</li>
+<li>默认实现类为DefaultSqlSession和SqlSessionManager</li>
+<li>实现：从大的配置对象中取出需要的对象，委托给执行器去处理</li>
+</ul>
+<h3 id="2-SqlSessionFactory"><a href="#2-SqlSessionFactory" class="headerlink" title="2.SqlSessionFactory"></a>2.SqlSessionFactory</h3><ul>
+<li>创建SqlSesion的工厂类</li>
+<li>默认实现为DefaultSqlSessionFactory和SqlSessionManager</li>
+</ul>
+<h3 id="3-SqlSession-与SqlSessionFactory的类结构图"><a href="#3-SqlSession-与SqlSessionFactory的类结构图" class="headerlink" title="3.SqlSession 与SqlSessionFactory的类结构图"></a>3.SqlSession 与SqlSessionFactory的类结构图</h3><p><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gden5vrcdcj310a0j875n.jpg" alt=""></p>
+<h3 id="4-SqlSession初始化流程"><a href="#4-SqlSession初始化流程" class="headerlink" title="4.SqlSession初始化流程"></a>4.SqlSession初始化流程</h3><p><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gden5vdag4j30qy0mw42o.jpg" alt=""></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/mybatis源码学习//" class="article-tag-list-link color2">mybatis源码学习</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/03/26/mybatis-lesson-1/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
   
 
 
