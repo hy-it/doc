@@ -6,22 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://hy-it.github.io">
-  <title>mybatis 源码学习一 （SqlSession和SqlSessionFactory） | Hexo</title>
+  <title>基于Yapi+swagger的接口自动化搭建 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1.SqlSession 数据库的CRUD操作的核心接口类 默认实现类为DefaultSqlSession和SqlSessionManager 实现：从大的配置对象中取出需要的对象，委托给执行器去处理  2.SqlSessionFactory 创建SqlSesion的工厂类 默认实现为DefaultSqlSessionFactory和SqlSessionManager  3.SqlSession">
+  <meta name="description" content="一 基于容器搭建Yapi安装步骤1参考地址：https:&#x2F;&#x2F;github.com&#x2F;fjc0k&#x2F;docker-YApi   git clone https:&#x2F;&#x2F;github.com&#x2F;fjc0k&#x2F;docker-YApi.gitdocker-compose up -d访问：http:&#x2F;&#x2F;localhost:40001   二 配置系统初始化账号和密码 修改dock">
 <meta property="og:type" content="article">
-<meta property="og:title" content="mybatis 源码学习一 （SqlSession和SqlSessionFactory）">
-<meta property="og:url" content="http://hy-it.github.io/2020/04/01/mybatis-lesson-1/index.html">
+<meta property="og:title" content="基于Yapi+swagger的接口自动化搭建">
+<meta property="og:url" content="http://hy-it.github.io/2020/04/05/auto_http/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="1.SqlSession 数据库的CRUD操作的核心接口类 默认实现类为DefaultSqlSession和SqlSessionManager 实现：从大的配置对象中取出需要的对象，委托给执行器去处理  2.SqlSessionFactory 创建SqlSesion的工厂类 默认实现为DefaultSqlSessionFactory和SqlSessionManager  3.SqlSession">
+<meta property="og:description" content="一 基于容器搭建Yapi安装步骤1参考地址：https:&#x2F;&#x2F;github.com&#x2F;fjc0k&#x2F;docker-YApi   git clone https:&#x2F;&#x2F;github.com&#x2F;fjc0k&#x2F;docker-YApi.gitdocker-compose up -d访问：http:&#x2F;&#x2F;localhost:40001   二 配置系统初始化账号和密码 修改dock">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/00831rSTgy1gden5vrcdcj310a0j875n.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/00831rSTgy1gden5vdag4j30qy0mw42o.jpg">
-<meta property="article:published_time" content="2020-04-01T07:28:58.000Z">
-<meta property="article:modified_time" content="2020-04-07T05:48:07.609Z">
+<meta property="article:published_time" content="2020-04-05T07:28:58.000Z">
+<meta property="article:modified_time" content="2020-04-07T08:39:21.987Z">
 <meta property="article:author" content="Allen">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/00831rSTgy1gden5vrcdcj310a0j875n.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -157,37 +154,42 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-mybatis-lesson-1" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-auto_http" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      mybatis 源码学习一 （SqlSession和SqlSessionFactory）
+      基于Yapi+swagger的接口自动化搭建
     </h1>
   
 
         
-        <a href="/2020/04/01/mybatis-lesson-1/" class="archive-article-date">
-  	<time datetime="2020-04-01T07:28:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-01</time>
+        <a href="/2020/04/05/auto_http/" class="archive-article-date">
+  	<time datetime="2020-04-05T07:28:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-05</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="1-SqlSession"><a href="#1-SqlSession" class="headerlink" title="1.SqlSession"></a>1.SqlSession</h3><ul>
-<li>数据库的CRUD操作的核心接口类</li>
-<li>默认实现类为DefaultSqlSession和SqlSessionManager</li>
-<li>实现：从大的配置对象中取出需要的对象，委托给执行器去处理</li>
+        <h3 id="一-基于容器搭建Yapi"><a href="#一-基于容器搭建Yapi" class="headerlink" title="一 基于容器搭建Yapi"></a>一 基于容器搭建Yapi</h3><h4 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">参考地址：https:&#x2F;&#x2F;github.com&#x2F;fjc0k&#x2F;docker-YApi</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>git clone <a href="https://github.com/fjc0k/docker-YApi.git" target="_blank" rel="noopener">https://github.com/fjc0k/docker-YApi.git</a><br>docker-compose up -d<br>访问：<a href="http://localhost:40001" target="_blank" rel="noopener">http://localhost:40001</a> </p>
+</blockquote>
+<h3 id="二-配置系统初始化账号和密码"><a href="#二-配置系统初始化账号和密码" class="headerlink" title="二 配置系统初始化账号和密码"></a>二 配置系统初始化账号和密码</h3><ul>
+<li>修改docker-compose.yml 配置YAPI_ADMIN_ACCOUNT=xxxx   YAPI_ADMIN_PASSWORD=xxxx</li>
 </ul>
-<h3 id="2-SqlSessionFactory"><a href="#2-SqlSessionFactory" class="headerlink" title="2.SqlSessionFactory"></a>2.SqlSessionFactory</h3><ul>
-<li>创建SqlSesion的工厂类</li>
-<li>默认实现为DefaultSqlSessionFactory和SqlSessionManager</li>
+<h3 id="三-Swagger接口导入"><a href="#三-Swagger接口导入" class="headerlink" title="三 Swagger接口导入"></a>三 Swagger接口导入</h3><ul>
+<li>创建项目（配置环境地址）xxx-service</li>
+<li>配置数据管理Swagger-数据导入-开启URL导入-填写客户端的swagger地址</li>
 </ul>
-<h3 id="3-SqlSession-与SqlSessionFactory的类结构图"><a href="#3-SqlSession-与SqlSessionFactory的类结构图" class="headerlink" title="3.SqlSession 与SqlSessionFactory的类结构图"></a>3.SqlSession 与SqlSessionFactory的类结构图</h3><p><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gden5vrcdcj310a0j875n.jpg" alt=""></p>
-<h3 id="4-SqlSession初始化流程"><a href="#4-SqlSession初始化流程" class="headerlink" title="4.SqlSession初始化流程"></a>4.SqlSession初始化流程</h3><p><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gden5vdag4j30qy0mw42o.jpg" alt=""></p>
+<h3 id="四-添加测试集合"><a href="#四-添加测试集合" class="headerlink" title="四 添加测试集合"></a>四 添加测试集合</h3><ul>
+<li>选择需要测试的接口</li>
+<li>配置服务端测试-开始测试</li>
+</ul>
 
       
 
@@ -223,7 +225,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/mybatis//" class="article-tag-list-link color3">mybatis</a>
+        			<a href="/categories/接口自动化//" class="article-tag-list-link color1">接口自动化</a>
         		</li>
       		
 		</ul>
@@ -278,7 +280,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://hy-it.github.io/2020/04/01/mybatis-lesson-1/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://hy-it.github.io/2020/04/05/auto_http/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -292,18 +294,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/04/05/auto_http/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          基于Yapi+swagger的接口自动化搭建
-        
-      </div>
-    </a>
   
-  
-    <a href="/2020/04/01/python-linux/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Centos7 系统Python 2.7.5 切换为Python3.6.3步骤</div>
+    <a href="/2020/04/01/mybatis-lesson-1/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">mybatis 源码学习一 （SqlSession和SqlSessionFactory）</div>
       <i class="icon-circle-right"></i>
     </a>
   
