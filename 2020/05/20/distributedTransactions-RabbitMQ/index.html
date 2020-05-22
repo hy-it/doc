@@ -11,7 +11,7 @@
   <meta name="description" content="分布式事务解决方案的理论依据 CAP理论 BASE理论 2PC协议 3PC协议 Paxos算法. Raft一致性协议  1.基于RabbitMQ消息队列的分布式事务解决方案1.1 整体设计思路 实现说明用户下单后，可以等待支付中心数据生成,并非强制要求同时性  可靠生产：保证消息一定会发送到RabbitMQ服务 可靠消费：保证消息取出来一定正确消费掉 最终使多方数据达到一致  1.2 S1-可靠消">
 <meta property="og:type" content="article">
 <meta property="og:title" content="分布式事务-基于RabbitMQ的最终一致性实现方法">
-<meta property="og:url" content="http://hy-it.github.io/2020/05/20/%E4%BA%8B%E5%8A%A1-%E6%9C%80%E7%BB%88%E4%B8%80%E8%87%B4%E6%80%A7RabbitMQ/index.html">
+<meta property="og:url" content="http://hy-it.github.io/2020/05/20/distributedTransactions-RabbitMQ/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="分布式事务解决方案的理论依据 CAP理论 BASE理论 2PC协议 3PC协议 Paxos算法. Raft一致性协议  1.基于RabbitMQ消息队列的分布式事务解决方案1.1 整体设计思路 实现说明用户下单后，可以等待支付中心数据生成,并非强制要求同时性  可靠生产：保证消息一定会发送到RabbitMQ服务 可靠消费：保证消息取出来一定正确消费掉 最终使多方数据达到一致  1.2 S1-可靠消">
 <meta property="og:locale" content="en_US">
@@ -159,7 +159,7 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-事务-最终一致性RabbitMQ" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-distributedTransactions-RabbitMQ" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -171,7 +171,7 @@
   
 
         
-        <a href="/2020/05/20/%E4%BA%8B%E5%8A%A1-%E6%9C%80%E7%BB%88%E4%B8%80%E8%87%B4%E6%80%A7RabbitMQ/" class="archive-article-date">
+        <a href="/2020/05/20/distributedTransactions-RabbitMQ/" class="archive-article-date">
   	<time datetime="2020-05-20T07:28:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-20</time>
 </a>
         
@@ -317,7 +317,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://hy-it.github.io/2020/05/20/%E4%BA%8B%E5%8A%A1-%E6%9C%80%E7%BB%88%E4%B8%80%E8%87%B4%E6%80%A7RabbitMQ/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://hy-it.github.io/2020/05/20/distributedTransactions-RabbitMQ/" alt="微信分享二维码">
     </div>
 </div>
 
