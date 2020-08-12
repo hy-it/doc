@@ -152,6 +152,96 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-distribute_lock" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/05/distribute_lock/">分布式锁实现</a>
+    </h1>
+  
+
+        
+        <a href="/2020/07/05/distribute_lock/" class="archive-article-date">
+  	<time datetime="2020-07-05T07:28:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="分布式锁实现"><a href="#分布式锁实现" class="headerlink" title="分布式锁实现"></a>分布式锁实现</h3><h4 id="基于Redis的实现（AP）"><a href="#基于Redis的实现（AP）" class="headerlink" title="基于Redis的实现（AP）"></a>基于Redis的实现（AP）</h4><h5 id="基本实现"><a href="#基本实现" class="headerlink" title="基本实现"></a>基本实现</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SETNX resource_name random_value PX 30000</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>问题1:A线程业务逻辑执行较长B线程也进入加锁成功，B释放锁的是A线程的锁</p>
+<blockquote>
+<p>锁安全解决方案：random_value要全局唯一，一般会用请求ID设置，释放锁要用random_value来做释放；规则：谁加锁谁释放</p>
+</blockquote>
+</li>
+<li><p>问题2:业务执行时间超出了锁设置的过期时间，导致客户端同时执行</p>
+<blockquote>
+<p>启动一个锁超时的守护线程，根据当前线程的执行进度开启一个守护线程自动续约锁的超市时间</p>
+</blockquote>
+</li>
+<li><p>问题3:Redis的单点故障引起的主从切换问题</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">生产中redis一般是主从模式，主节点挂掉时，从节点会取而代之，客户端上却并没有明显感知。原先第一个客户端在主节点中申请成功了一把锁，但是这把锁还没有来得及同步到从节点，主节点突然挂掉了。然后从节点变成了主节点，这个新的节点内部没有这个锁，所以当另一个客户端过来请求加锁时，立即就批准了。这样就会导致系统中同样一把锁被两个客户端同时持有，不安全性由此产生。</span><br><span class="line"></span><br><span class="line">不过这种不安全也仅仅是在主从发生 failover 的情况下才会产生，而且持续时间极短，业务系统多数情况下可以容忍</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="基于ETCD的实现（CP）"><a href="#基于ETCD的实现（CP）" class="headerlink" title="基于ETCD的实现（CP）"></a>基于ETCD的实现（CP）</h4>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/分布式//" class="article-tag-list-link color4">分布式</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/07/05/distribute_lock/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-distributedTransactions-RabbitMQ" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
