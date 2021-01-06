@@ -152,6 +152,327 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-日志规范" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/01/05/%E6%97%A5%E5%BF%97%E8%A7%84%E8%8C%83/">日志规范</a>
+    </h1>
+  
+
+        
+        <a href="/2021/01/05/%E6%97%A5%E5%BF%97%E8%A7%84%E8%8C%83/" class="archive-article-date">
+  	<time datetime="2021-01-05T07:28:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="日志基本格式"><a href="#日志基本格式" class="headerlink" title="日志基本格式"></a>日志基本格式</h4><ul>
+<li>时间</li>
+<li>日志级别</li>
+<li>链路标识</li>
+<li>线程名称</li>
+<li>日志记录器名称</li>
+<li>日志内容</li>
+<li>异常堆栈（可有、可无）</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2021-01-06 11:49:15.588|http-nio-4051-exec-49|INFO |c.g.common.bean.aop.ControllerAop:120|TID:904306b8775844cc8d067ac8b4167cb1.166.16099049555710223|Controller AOP</span><br></pre></td></tr></table></figure>
+
+<h4 id="日志时间"><a href="#日志时间" class="headerlink" title="日志时间"></a>日志时间</h4><ul>
+<li>日志基本以天为维度进行滚动</li>
+</ul>
+<h4 id="日志级别"><a href="#日志级别" class="headerlink" title="日志级别"></a>日志级别</h4><ul>
+<li>DEBUG</li>
+</ul>
+<blockquote>
+<p>DEUBG 级别的主要输出调试性质的内容，该级别日志主要用于在开发、测试阶段输出。该级别的日志应尽可能地详尽，便于在开发、测试阶段出现问题或者异常时，对其进行分析</p>
+</blockquote>
+<ul>
+<li>INFO</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">INFO 级别的主要输出提示性质的内容，该级别日志主要用于生产环境的日志输出。该级别或更高级别的日志不要出现在循环中，可以在循环开始或者结束后输出循环的次数，以及一些其他重要的数据。</span><br><span class="line">应用启动时所加载的配置参数值（比如：连接参数、线程池参数、超时时间等，以及一些与环境相关的配置，或者是整个配置参数）</span><br><span class="line">一些重要的依赖注入对象的类名</span><br><span class="line">方法（服务方法）的输入参数值、返回值，由于一些方法入参的值非常多，只在入口处输出一次就可以了，在服务方法内部或者调用非服务方法时就不需要再输出了</span><br><span class="line">方法中重要的部分，比如：从数据库中所获取较为重要的数据，以及调用第三方接口的输入参数值和接口返回值</span><br><span class="line">INFO 级别日志原则是在生产环境中，通过 INFO 和更高级别的日志，可以了解系统的运行状况，以及出现问题或者异常时，能快速地对问题进行定位，还原当时调用的上下文数据，能重现问题。</span><br><span class="line">建议在项目完成后，在测试环境将日志级别调成 INFO，然后通过 INFO 级别的信息看看是否能了解这个应用的运用情况，如果出现问题后是否这些日志能否提供有用的排查问题的信息</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>WARN</li>
+</ul>
+<blockquote>
+<p>WARN 级别的主要输出警告性质的内容，这些内容是可以预知且是有规划的，比如，某个方法入参为空或者该参数的值不满足运行该方法的条件时。在 WARN 级别的时应输出较为详尽的信息，以便于事后对日志进行分析</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">log.warn(&quot;[&#123;&#125;] name is null&quot;,methodName);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>ERROR</p>
+<blockquote>
+<p>ERROR 级别主要针对于一些不可预知的信息，诸如：错误、异常等，比如，在 catch 块中抓获的网络通信、数据库连接等异常，若异常对系统的整个流程影响不大，可以使用 WARN 级别日志输出。在输出 ERROR 级别的日志时，尽量多地输出方法入参数、方法执行过程中产生的对象等数据，在带有错误、异常对象的数据</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">log.error(&quot;[&#123;&#125;] name is null&quot;,methodName,e);</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<h4 id="调用链路标识"><a href="#调用链路标识" class="headerlink" title="调用链路标识"></a>调用链路标识</h4><blockquote>
+<p>在分布式应用中，用户的一个请求会调用若干个服务完成，这些服务可能还是嵌套调用的，因此完成一个请求的日志并不在一个应用的日志文件，而是分散在不同服务器上不同应用节点的日志文件中。该标识是为了串联一个请求在整个系统中的调用日志</p>
+</blockquote>
+<h4 id="线程名称"><a href="#线程名称" class="headerlink" title="线程名称"></a>线程名称</h4><blockquote>
+<p>输出该日志的线程名称，一般在一个应用中一个同步请求由同一线程完成，输出线程名称可以在各个请求产生的日志中进行分类，便于分清当前请求上下文的日志</p>
+</blockquote>
+<h4 id="日志记录名称"><a href="#日志记录名称" class="headerlink" title="日志记录名称"></a>日志记录名称</h4><blockquote>
+<p>日志记录器名称一般使用类名，日志文件中可以输出简单的类名即可，看实际情况是否需要使用包名。主要用于看到日志后到哪个类中去找这个日志输出，便于定位问题所在</p>
+</blockquote>
+<h4 id="日志内容"><a href="#日志内容" class="headerlink" title="日志内容"></a>日志内容</h4><ul>
+<li><p>隐私信息内容脱敏</p>
+<table>
+<thead>
+<tr>
+<th><strong>类型</strong></th>
+<th><strong>要求</strong></th>
+<th>示例</th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>密码</td>
+<td>不输出</td>
+<td>**** **</td>
+<td>登录密码、支付密码等各种类型的密码</td>
+</tr>
+<tr>
+<td>信用卡 CVV2</td>
+<td>不输出</td>
+<td>***</td>
+<td></td>
+</tr>
+<tr>
+<td>信用卡有效期</td>
+<td>不输出</td>
+<td>****</td>
+<td></td>
+</tr>
+<tr>
+<td>验证码</td>
+<td>不输出</td>
+<td>**** **</td>
+<td>图形验证码、短信验证码、邮件验证码等</td>
+</tr>
+<tr>
+<td>密钥、盐</td>
+<td>前 5 后 5</td>
+<td>**** **</td>
+<td>用于加解密算法的密钥，消息摘要的盐，以及数字签名及签名验证算法所使用的公私钥对等</td>
+</tr>
+<tr>
+<td>会话 ID设备指纹 (ID)指纹 token密文数据</td>
+<td>前 5 后 5</td>
+<td>xxx***xxx</td>
+<td>主要有以下类型：1. 应用的会话标识，比如：Web、APP、H5 等用于识别会话状态信息的标识2. APP 标识设备的设备指纹或者设备 ID3. APP 用于指纹验证的 token 4. 密文数据指的是加密后的数据被掩码的字符无论多少位都输出 3 个 *</td>
+</tr>
+<tr>
+<td>银行卡卡号</td>
+<td>前 6 后 4</td>
+<td>4401666**** **0083</td>
+<td>银行卡卡号最多 19 位数字</td>
+</tr>
+<tr>
+<td>手机号</td>
+<td>前 3 后 4</td>
+<td>135**** 9527</td>
+<td>定长 11 位数字</td>
+</tr>
+<tr>
+<td>身份证号</td>
+<td>前 1 后 1</td>
+<td>6**** **X</td>
+<td>定长 18 位</td>
+</tr>
+<tr>
+<td>姓名</td>
+<td>隐姓</td>
+<td>*老三</td>
+<td>将姓氏隐藏</td>
+</tr>
+<tr>
+<td>IP 地址</td>
+<td>前 1 后 1</td>
+<td>10.<em>.</em>.27</td>
+<td>隐藏 IP 地址的第 2、第 3 段</td>
+</tr>
+<tr>
+<td>邮箱地址</td>
+<td>前 1 后 1</td>
+<td>w**3@gmail.com</td>
+<td>仅对 @ 之前的邮箱名称进行掩码，掩码部分不管多少位均输出 ** *</td>
+</tr>
+<tr>
+<td>地址</td>
+<td>隐号码</td>
+<td>上海市西藏北路 <strong>* 号 ** * 楼 *</strong> 室</td>
+<td></td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<h4 id="异常堆栈"><a href="#异常堆栈" class="headerlink" title="异常堆栈"></a>异常堆栈</h4><blockquote>
+<p>异常堆栈一般会出现在 ERROR 或者 WARN 级别的日志中，异常堆栈含有方法调用链的系统，以及异常产生的根源。异常堆栈的日志属于上一行日志的，在日志收集时需要将其划至上一行中</p>
+</blockquote>
+<h4 id="日志文件"><a href="#日志文件" class="headerlink" title="日志文件"></a>日志文件</h4><blockquote>
+<p>日志文件放置于固定的目录中，按照一定的模板进行命名，推荐的日志文件名称：</p>
+<ul>
+<li>应用日志命名：当前正在写入的日志文件名：&lt;应用名&gt;[-&lt;功能名&gt;].log</li>
+<li>移动日志命名：&lt;设备&gt;[-&lt;功能名&gt;].log</li>
+</ul>
+</blockquote>
+<h4 id="日志配置"><a href="#日志配置" class="headerlink" title="日志配置"></a>日志配置</h4><blockquote>
+<p>根据不同的环境配置不同的日志输出方式：</p>
+<ul>
+<li>本地调试可以将日志输出到控制台上</li>
+<li>测试环境或者生产环境输出到文件中，每天产生一个文件，如果日志量庞大可以每个小时产生一个日志文件</li>
+<li>生产环境中的文件输出，可以考虑使用异步文件输出，该种方式日志并不会马上刷新到文件中去，会产生日志延时，在停止应用时可能会导致一些还在内存中的日志未能及时刷新到文件中去而产生丢失，如果对于应用的要求并不是非常高的话，可暂不考虑异步日志</li>
+</ul>
+<p>logback 日志工具可以在日志文件滚动后将前一文件进行压缩，以减少磁盘空间占用，若使用 logback 对于日志量庞大的应用建议开启该功能。</p>
+</blockquote>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/规范文档//" class="article-tag-list-link color5">规范文档</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/01/05/%E6%97%A5%E5%BF%97%E8%A7%84%E8%8C%83/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-mysql/mysql总结(一)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/09/13/mysql/mysql%E6%80%BB%E7%BB%93(%E4%B8%80)/">Mysql 总结（一）基础示意图</a>
+    </h1>
+  
+
+        
+        <a href="/2020/09/13/mysql/mysql%E6%80%BB%E7%BB%93(%E4%B8%80)/" class="archive-article-date">
+  	<time datetime="2020-09-13T03:03:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-13</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Mysql-整体架构示意图"><a href="#Mysql-整体架构示意图" class="headerlink" title="Mysql 整体架构示意图"></a>Mysql 整体架构示意图</h3><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gipzbobju3j30va0sgadg.jpg" alt="">÷</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">**Server层:**</span><br><span class="line">包括连接器、查询缓存、分析器、优化器、执行器等，涵盖MySQL的大多数核心服务功能，以及所有的内置函数（如日期、时间、数学和加密函数等），所有跨存储引擎的功能都在这一层实现，比如存储过程、触发器、视图等。</span><br><span class="line"></span><br><span class="line">**存储引擎层:**</span><br><span class="line">负责数据的存储和提取。其架构模式是插件式的，支持InnoDB、MyISAM、Memory等多个存储引擎。现在最常用的存储引擎是InnoDB，它从MySQL 5.5.5版本开始成为了默认存储引擎</span><br></pre></td></tr></table></figure>
+<h4 id="连机器"><a href="#连机器" class="headerlink" title="连机器"></a>连机器</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">连接器负责跟客户端建立连接、获取权限、维持和管理连接</span><br></pre></td></tr></table></figure>
+
+<h4 id="查询缓存"><a href="#查询缓存" class="headerlink" title="查询缓存"></a>查询缓存</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">MySQL拿到一个查询请求后，会先到查询缓存看看，之前是不是执行过这条语句.</span><br><span class="line">查询缓存的失效非常频繁，只要有对一个表的更新，这个表上所有的查询缓存都会被清空。因此很可能你费劲地把结果存起来，还没使用呢，就被一个更新全清空了。对于更新压力大的数据库来说，查询缓存的命中率会非常低。除非你的业务就是有一张静态表，很长时间才会更新一次。比如，一个系统配置表，那这张表上的查询才适合使用查询缓存.</span><br><span class="line">查询缓存往往弊大于利,MySQL 8.0版本直接将查询缓存的整块功能删掉了，也就是说8.0开始彻底没有这个功能了.</span><br></pre></td></tr></table></figure>
+
+<h4 id="分析器"><a href="#分析器" class="headerlink" title="分析器"></a>分析器</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">分析器解决：语句主要做什么</span><br><span class="line">如果没有命中查询缓存，就要开始真正执行语句；先做词法分析，再做语法分析</span><br></pre></td></tr></table></figure>
+
+<h4 id="优化器"><a href="#优化器" class="headerlink" title="优化器"></a>优化器</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">优化器解决：语句该怎么做</span><br><span class="line">经过了分析器，MySQL就知道你要做什么了。在开始执行之前，还要先经过优化器的处理。</span><br><span class="line">优化器是在表里面有多个索引的时候，决定使用哪个索引；或者在一个语句有多表关联（join）的时候，决定各个表的连接顺序。</span><br><span class="line">优化器阶段完成后，这个语句的执行方案就确定下来了，然后进入执行器阶段。</span><br></pre></td></tr></table></figure>
+
+<h4 id="执行器"><a href="#执行器" class="headerlink" title="执行器"></a>执行器</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">开始执行的时候，要先判断一下你对这个表T有没有执行查询的权限，如果没有，就会返回没有权限的错误；如果有权限，就打开表继续执行。打开表的时候，执行器就会根据表的引擎定义，去使用这个引擎提供的接口。</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Mysql//" class="article-tag-list-link color1">Mysql</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/09/13/mysql/mysql%E6%80%BB%E7%BB%93(%E4%B8%80)/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-api_security" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -592,6 +913,90 @@
 
 
   
+    <article id="post-mybatis-lesson-1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/01/mybatis-lesson-1/">mybatis 源码学习一 （SqlSession和SqlSessionFactory）</a>
+    </h1>
+  
+
+        
+        <a href="/2020/04/01/mybatis-lesson-1/" class="archive-article-date">
+  	<time datetime="2020-04-01T07:28:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-SqlSession"><a href="#1-SqlSession" class="headerlink" title="1.SqlSession"></a>1.SqlSession</h3><ul>
+<li>数据库的CRUD操作的核心接口类</li>
+<li>默认实现类为DefaultSqlSession和SqlSessionManager</li>
+<li>实现：从大的配置对象中取出需要的对象，委托给执行器去处理</li>
+</ul>
+<h3 id="2-SqlSessionFactory"><a href="#2-SqlSessionFactory" class="headerlink" title="2.SqlSessionFactory"></a>2.SqlSessionFactory</h3><ul>
+<li>创建SqlSesion的工厂类</li>
+<li>默认实现为DefaultSqlSessionFactory和SqlSessionManager</li>
+</ul>
+<h3 id="3-SqlSession-与SqlSessionFactory的类结构图"><a href="#3-SqlSession-与SqlSessionFactory的类结构图" class="headerlink" title="3.SqlSession 与SqlSessionFactory的类结构图"></a>3.SqlSession 与SqlSessionFactory的类结构图</h3><p><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gden5vrcdcj310a0j875n.jpg" alt=""></p>
+<h3 id="4-SqlSession初始化流程"><a href="#4-SqlSession初始化流程" class="headerlink" title="4.SqlSession初始化流程"></a>4.SqlSession初始化流程</h3><p><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gden5vdag4j30qy0mw42o.jpg" alt=""></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/mybatis//" class="article-tag-list-link color3">mybatis</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/04/01/mybatis-lesson-1/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-python-linux" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -648,90 +1053,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/04/01/python-linux/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-mybatis-lesson-1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/01/mybatis-lesson-1/">mybatis 源码学习一 （SqlSession和SqlSessionFactory）</a>
-    </h1>
-  
-
-        
-        <a href="/2020/04/01/mybatis-lesson-1/" class="archive-article-date">
-  	<time datetime="2020-04-01T07:28:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="1-SqlSession"><a href="#1-SqlSession" class="headerlink" title="1.SqlSession"></a>1.SqlSession</h3><ul>
-<li>数据库的CRUD操作的核心接口类</li>
-<li>默认实现类为DefaultSqlSession和SqlSessionManager</li>
-<li>实现：从大的配置对象中取出需要的对象，委托给执行器去处理</li>
-</ul>
-<h3 id="2-SqlSessionFactory"><a href="#2-SqlSessionFactory" class="headerlink" title="2.SqlSessionFactory"></a>2.SqlSessionFactory</h3><ul>
-<li>创建SqlSesion的工厂类</li>
-<li>默认实现为DefaultSqlSessionFactory和SqlSessionManager</li>
-</ul>
-<h3 id="3-SqlSession-与SqlSessionFactory的类结构图"><a href="#3-SqlSession-与SqlSessionFactory的类结构图" class="headerlink" title="3.SqlSession 与SqlSessionFactory的类结构图"></a>3.SqlSession 与SqlSessionFactory的类结构图</h3><p><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gden5vrcdcj310a0j875n.jpg" alt=""></p>
-<h3 id="4-SqlSession初始化流程"><a href="#4-SqlSession初始化流程" class="headerlink" title="4.SqlSession初始化流程"></a>4.SqlSession初始化流程</h3><p><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gden5vdag4j30qy0mw42o.jpg" alt=""></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/mybatis//" class="article-tag-list-link color3">mybatis</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/04/01/mybatis-lesson-1/">展开全文 >></a>
         </p>
       
 
@@ -985,7 +1306,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2020 Allen
+    		&copy; 2021 Allen
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten

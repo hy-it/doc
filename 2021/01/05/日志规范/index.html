@@ -6,13 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://hy-it.github.io">
-  <title>Archives | Hexo</title>
+  <title>日志规范 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://hy-it.github.io/archives/index.html">
+  <meta name="description" content="日志基本格式 时间 日志级别 链路标识 线程名称 日志记录器名称 日志内容 异常堆栈（可有、可无）  12021-01-06 11:49:15.588|http-nio-4051-exec-49|INFO |c.g.common.bean.aop.ControllerAop:120|TID:904306b8775844cc8d067ac8b4167cb1.166.16099049555710223">
+<meta property="og:type" content="article">
+<meta property="og:title" content="日志规范">
+<meta property="og:url" content="http://hy-it.github.io/2021/01/05/%E6%97%A5%E5%BF%97%E8%A7%84%E8%8C%83/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="日志基本格式 时间 日志级别 链路标识 线程名称 日志记录器名称 日志内容 异常堆栈（可有、可无）  12021-01-06 11:49:15.588|http-nio-4051-exec-49|INFO |c.g.common.bean.aop.ControllerAop:120|TID:904306b8775844cc8d067ac8b4167cb1.166.16099049555710223">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-01-05T07:28:58.000Z">
+<meta property="article:modified_time" content="2021-01-06T04:47:12.283Z">
 <meta property="article:author" content="Allen">
 <meta name="twitter:card" content="summary">
   
@@ -150,37 +154,220 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-日志规范" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      日志规范
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/01/05/%E6%97%A5%E5%BF%97%E8%A7%84%E8%8C%83/" class="archive-article-date">
+
+        
+        <a href="/2021/01/05/%E6%97%A5%E5%BF%97%E8%A7%84%E8%8C%83/" class="archive-article-date">
   	<time datetime="2021-01-05T07:28:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-05</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/01/05/%E6%97%A5%E5%BF%97%E8%A7%84%E8%8C%83/">日志规范</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="日志基本格式"><a href="#日志基本格式" class="headerlink" title="日志基本格式"></a>日志基本格式</h4><ul>
+<li>时间</li>
+<li>日志级别</li>
+<li>链路标识</li>
+<li>线程名称</li>
+<li>日志记录器名称</li>
+<li>日志内容</li>
+<li>异常堆栈（可有、可无）</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2021-01-06 11:49:15.588|http-nio-4051-exec-49|INFO |c.g.common.bean.aop.ControllerAop:120|TID:904306b8775844cc8d067ac8b4167cb1.166.16099049555710223|Controller AOP</span><br></pre></td></tr></table></figure>
 
-        <div class="article-info info-on-right">
-          
-          
+<h4 id="日志时间"><a href="#日志时间" class="headerlink" title="日志时间"></a>日志时间</h4><ul>
+<li>日志基本以天为维度进行滚动</li>
+</ul>
+<h4 id="日志级别"><a href="#日志级别" class="headerlink" title="日志级别"></a>日志级别</h4><ul>
+<li>DEBUG</li>
+</ul>
+<blockquote>
+<p>DEUBG 级别的主要输出调试性质的内容，该级别日志主要用于在开发、测试阶段输出。该级别的日志应尽可能地详尽，便于在开发、测试阶段出现问题或者异常时，对其进行分析</p>
+</blockquote>
+<ul>
+<li>INFO</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">INFO 级别的主要输出提示性质的内容，该级别日志主要用于生产环境的日志输出。该级别或更高级别的日志不要出现在循环中，可以在循环开始或者结束后输出循环的次数，以及一些其他重要的数据。</span><br><span class="line">应用启动时所加载的配置参数值（比如：连接参数、线程池参数、超时时间等，以及一些与环境相关的配置，或者是整个配置参数）</span><br><span class="line">一些重要的依赖注入对象的类名</span><br><span class="line">方法（服务方法）的输入参数值、返回值，由于一些方法入参的值非常多，只在入口处输出一次就可以了，在服务方法内部或者调用非服务方法时就不需要再输出了</span><br><span class="line">方法中重要的部分，比如：从数据库中所获取较为重要的数据，以及调用第三方接口的输入参数值和接口返回值</span><br><span class="line">INFO 级别日志原则是在生产环境中，通过 INFO 和更高级别的日志，可以了解系统的运行状况，以及出现问题或者异常时，能快速地对问题进行定位，还原当时调用的上下文数据，能重现问题。</span><br><span class="line">建议在项目完成后，在测试环境将日志级别调成 INFO，然后通过 INFO 级别的信息看看是否能了解这个应用的运用情况，如果出现问题后是否这些日志能否提供有用的排查问题的信息</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>WARN</li>
+</ul>
+<blockquote>
+<p>WARN 级别的主要输出警告性质的内容，这些内容是可以预知且是有规划的，比如，某个方法入参为空或者该参数的值不满足运行该方法的条件时。在 WARN 级别的时应输出较为详尽的信息，以便于事后对日志进行分析</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">log.warn(&quot;[&#123;&#125;] name is null&quot;,methodName);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>ERROR</p>
+<blockquote>
+<p>ERROR 级别主要针对于一些不可预知的信息，诸如：错误、异常等，比如，在 catch 块中抓获的网络通信、数据库连接等异常，若异常对系统的整个流程影响不大，可以使用 WARN 级别日志输出。在输出 ERROR 级别的日志时，尽量多地输出方法入参数、方法执行过程中产生的对象等数据，在带有错误、异常对象的数据</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">log.error(&quot;[&#123;&#125;] name is null&quot;,methodName,e);</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<h4 id="调用链路标识"><a href="#调用链路标识" class="headerlink" title="调用链路标识"></a>调用链路标识</h4><blockquote>
+<p>在分布式应用中，用户的一个请求会调用若干个服务完成，这些服务可能还是嵌套调用的，因此完成一个请求的日志并不在一个应用的日志文件，而是分散在不同服务器上不同应用节点的日志文件中。该标识是为了串联一个请求在整个系统中的调用日志</p>
+</blockquote>
+<h4 id="线程名称"><a href="#线程名称" class="headerlink" title="线程名称"></a>线程名称</h4><blockquote>
+<p>输出该日志的线程名称，一般在一个应用中一个同步请求由同一线程完成，输出线程名称可以在各个请求产生的日志中进行分类，便于分清当前请求上下文的日志</p>
+</blockquote>
+<h4 id="日志记录名称"><a href="#日志记录名称" class="headerlink" title="日志记录名称"></a>日志记录名称</h4><blockquote>
+<p>日志记录器名称一般使用类名，日志文件中可以输出简单的类名即可，看实际情况是否需要使用包名。主要用于看到日志后到哪个类中去找这个日志输出，便于定位问题所在</p>
+</blockquote>
+<h4 id="日志内容"><a href="#日志内容" class="headerlink" title="日志内容"></a>日志内容</h4><ul>
+<li><p>隐私信息内容脱敏</p>
+<table>
+<thead>
+<tr>
+<th><strong>类型</strong></th>
+<th><strong>要求</strong></th>
+<th>示例</th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>密码</td>
+<td>不输出</td>
+<td>**** **</td>
+<td>登录密码、支付密码等各种类型的密码</td>
+</tr>
+<tr>
+<td>信用卡 CVV2</td>
+<td>不输出</td>
+<td>***</td>
+<td></td>
+</tr>
+<tr>
+<td>信用卡有效期</td>
+<td>不输出</td>
+<td>****</td>
+<td></td>
+</tr>
+<tr>
+<td>验证码</td>
+<td>不输出</td>
+<td>**** **</td>
+<td>图形验证码、短信验证码、邮件验证码等</td>
+</tr>
+<tr>
+<td>密钥、盐</td>
+<td>前 5 后 5</td>
+<td>**** **</td>
+<td>用于加解密算法的密钥，消息摘要的盐，以及数字签名及签名验证算法所使用的公私钥对等</td>
+</tr>
+<tr>
+<td>会话 ID设备指纹 (ID)指纹 token密文数据</td>
+<td>前 5 后 5</td>
+<td>xxx***xxx</td>
+<td>主要有以下类型：1. 应用的会话标识，比如：Web、APP、H5 等用于识别会话状态信息的标识2. APP 标识设备的设备指纹或者设备 ID3. APP 用于指纹验证的 token 4. 密文数据指的是加密后的数据被掩码的字符无论多少位都输出 3 个 *</td>
+</tr>
+<tr>
+<td>银行卡卡号</td>
+<td>前 6 后 4</td>
+<td>4401666**** **0083</td>
+<td>银行卡卡号最多 19 位数字</td>
+</tr>
+<tr>
+<td>手机号</td>
+<td>前 3 后 4</td>
+<td>135**** 9527</td>
+<td>定长 11 位数字</td>
+</tr>
+<tr>
+<td>身份证号</td>
+<td>前 1 后 1</td>
+<td>6**** **X</td>
+<td>定长 18 位</td>
+</tr>
+<tr>
+<td>姓名</td>
+<td>隐姓</td>
+<td>*老三</td>
+<td>将姓氏隐藏</td>
+</tr>
+<tr>
+<td>IP 地址</td>
+<td>前 1 后 1</td>
+<td>10.<em>.</em>.27</td>
+<td>隐藏 IP 地址的第 2、第 3 段</td>
+</tr>
+<tr>
+<td>邮箱地址</td>
+<td>前 1 后 1</td>
+<td>w**3@gmail.com</td>
+<td>仅对 @ 之前的邮箱名称进行掩码，掩码部分不管多少位均输出 ** *</td>
+</tr>
+<tr>
+<td>地址</td>
+<td>隐号码</td>
+<td>上海市西藏北路 <strong>* 号 ** * 楼 *</strong> 室</td>
+<td></td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<h4 id="异常堆栈"><a href="#异常堆栈" class="headerlink" title="异常堆栈"></a>异常堆栈</h4><blockquote>
+<p>异常堆栈一般会出现在 ERROR 或者 WARN 级别的日志中，异常堆栈含有方法调用链的系统，以及异常产生的根源。异常堆栈的日志属于上一行日志的，在日志收集时需要将其划至上一行中</p>
+</blockquote>
+<h4 id="日志文件"><a href="#日志文件" class="headerlink" title="日志文件"></a>日志文件</h4><blockquote>
+<p>日志文件放置于固定的目录中，按照一定的模板进行命名，推荐的日志文件名称：</p>
+<ul>
+<li>应用日志命名：当前正在写入的日志文件名：&lt;应用名&gt;[-&lt;功能名&gt;].log</li>
+<li>移动日志命名：&lt;设备&gt;[-&lt;功能名&gt;].log</li>
+</ul>
+</blockquote>
+<h4 id="日志配置"><a href="#日志配置" class="headerlink" title="日志配置"></a>日志配置</h4><blockquote>
+<p>根据不同的环境配置不同的日志输出方式：</p>
+<ul>
+<li>本地调试可以将日志输出到控制台上</li>
+<li>测试环境或者生产环境输出到文件中，每天产生一个文件，如果日志量庞大可以每个小时产生一个日志文件</li>
+<li>生产环境中的文件输出，可以考虑使用异步文件输出，该种方式日志并不会马上刷新到文件中去，会产生日志延时，在停止应用时可能会导致一些还在内存中的日志未能及时刷新到文件中去而产生丢失，如果对于应用的要求并不是非常高的话，可暂不考虑异步日志</li>
+</ul>
+<p>logback 日志工具可以在日志文件滚动后将前一文件进行压缩，以减少磁盘空间占用，若使用 logback 对于日志量庞大的应用建议开启该功能。</p>
+</blockquote>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -193,331 +380,104 @@
 	</div>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
       
-        </div></section>
+
       
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://hy-it.github.io/2021/01/05/%E6%97%A5%E5%BF%97%E8%A7%84%E8%8C%83/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/09/13/mysql/mysql%E6%80%BB%E7%BB%93(%E4%B8%80)/" class="archive-article-date">
-  	<time datetime="2020-09-13T03:03:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-13</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/09/13/mysql/mysql%E6%80%BB%E7%BB%93(%E4%B8%80)/">Mysql 总结（一）基础示意图</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Mysql//" class="article-tag-list-link color1">Mysql</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/08/15/api_security/" class="archive-article-date">
-  	<time datetime="2020-08-15T07:28:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-15</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2020/09/13/mysql/mysql%E6%80%BB%E7%BB%93(%E4%B8%80)/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Mysql 总结（一）基础示意图</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/08/15/api_security/">Http 接口安全设计分析</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/HTTP接口//" class="article-tag-list-link color2">HTTP接口</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+        
+    </div>
+</aside>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/07/05/distribute_lock/" class="archive-article-date">
-  	<time datetime="2020-07-05T07:28:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-05</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/07/05/distribute_lock/">分布式锁实现</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/分布式//" class="article-tag-list-link color4">分布式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/05/20/distributedTransactions-RabbitMQ/" class="archive-article-date">
-  	<time datetime="2020-05-20T07:28:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/05/20/distributedTransactions-RabbitMQ/">分布式事务-基于RabbitMQ的最终一致性实现方法</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/分布式//" class="article-tag-list-link color4">分布式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/04/05/auto_http/" class="archive-article-date">
-  	<time datetime="2020-04-05T07:28:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/05/auto_http/">基于Yapi+swagger的接口自动化搭建</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/接口自动化//" class="article-tag-list-link color1">接口自动化</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/04/01/mybatis-lesson-1/" class="archive-article-date">
-  	<time datetime="2020-04-01T07:28:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-01</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/01/mybatis-lesson-1/">mybatis 源码学习一 （SqlSession和SqlSessionFactory）</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/mybatis//" class="article-tag-list-link color3">mybatis</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/04/01/python-linux/" class="archive-article-date">
-  	<time datetime="2020-04-01T07:28:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-01</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/01/python-linux/">Centos7 系统Python 2.7.5 切换为Python3.6.3步骤</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/03/26/url_api/" class="archive-article-date">
-  	<time datetime="2020-03-26T07:28:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-26</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/03/26/url_api/">接口设计规范</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/规范文档//" class="article-tag-list-link color5">规范文档</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -540,8 +500,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
