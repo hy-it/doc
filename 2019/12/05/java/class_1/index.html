@@ -6,15 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://hy-it.github.io">
-  <title>Archives | Hexo</title>
+  <title>（一）对象的存储结构 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://hy-it.github.io/archives/index.html">
+  <meta name="description" content="HotSpot虚拟机中，对象在内存中存储的布局可以分为3块区域：对象头（Header）、实例数据（Instance Data）和对齐填充（Padding）。下图为普通对象和数组实例的存储结构：   1.1 对象头 HotSpot虚拟机对象头分为：（Mark Word）存储对象运行时数据，Klass（类型指针）、数组长度（只有数组对象有）  1.1.1 对象自身运行时数据 数组运行时数据包含：哈希">
+<meta property="og:type" content="article">
+<meta property="og:title" content="（一）对象的存储结构">
+<meta property="og:url" content="http://hy-it.github.io/2019/12/05/java/class_1/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="HotSpot虚拟机中，对象在内存中存储的布局可以分为3块区域：对象头（Header）、实例数据（Instance Data）和对齐填充（Padding）。下图为普通对象和数组实例的存储结构：   1.1 对象头 HotSpot虚拟机对象头分为：（Mark Word）存储对象运行时数据，Klass（类型指针）、数组长度（只有数组对象有）  1.1.1 对象自身运行时数据 数组运行时数据包含：哈希">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008eGmZEgy1gpkth2f3byj31ao0lgad6.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008eGmZEgy1gpkumx81ztj312g0asdk0.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008eGmZEgy1gpkusuo6fej31e40rqn1y.jpg">
+<meta property="article:published_time" content="2019-12-05T07:28:58.000Z">
+<meta property="article:modified_time" content="2021-04-15T16:14:04.924Z">
 <meta property="article:author" content="Allen">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/008eGmZEgy1gpkth2f3byj31ao0lgad6.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -150,415 +158,213 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-java/class_1" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      （一）对象的存储结构
+    </h1>
+  
+
+        
+        <a href="/2019/12/05/java/class_1/" class="archive-article-date">
+  	<time datetime="2019-12-05T07:28:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-05</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>HotSpot虚拟机中，对象在内存中存储的布局可以分为3块区域：<strong>对象头（Header）、实例数据（Instance Data）和对齐填充（Padding）</strong>。下图为普通对象和数组实例的存储结构：</p>
+</blockquote>
+<p><img src="https://tva1.sinaimg.cn/large/008eGmZEgy1gpkth2f3byj31ao0lgad6.jpg" alt="企业微信截图_43f00515-8e29-47ff-8d70-64b87bf2ad2b"></p>
+<h3 id="1-1-对象头"><a href="#1-1-对象头" class="headerlink" title="1.1 对象头"></a>1.1 对象头</h3><blockquote>
+<p>HotSpot虚拟机对象头分为：<strong>（Mark Word）存储对象运行时数据，Klass（类型指针）、数组长度（只有数组对象有）</strong></p>
+</blockquote>
+<h4 id="1-1-1-对象自身运行时数据"><a href="#1-1-1-对象自身运行时数据" class="headerlink" title="1.1.1 对象自身运行时数据"></a>1.1.1 对象自身运行时数据</h4><blockquote>
+<p>数组运行时数据包含：哈希码、GC分代年龄、锁状态标志、线程持有的锁、偏向线程ID、偏向时间戳等。</p>
+</blockquote>
+<ul>
+<li><p>锁状态标识<br><img src="https://tva1.sinaimg.cn/large/008eGmZEgy1gpkumx81ztj312g0asdk0.jpg" alt="HotSpot虚拟机头对象头"></p>
+</li>
+<li><p>锁状态</p>
+<blockquote>
+<p>当一个对象刚开始new出来时，该对象是无锁状态。此时偏向锁位为0，锁标志位01,如果有线程上锁：指的就是把markword的线程ID改为自己线程ID的过程；如果有线程竞争：撤销偏向锁，升级轻量级锁，线程在自己的线程栈生成LockRecord，用CAS操作将markword设置为指向自己这个线程的LockRecord的指针，设置成功者得到锁；如果竞争加剧竞争加剧：有线程超过10次自旋，<br>-XX:PreBlockSpin，或者自旋线程数超过CPU核树的一半，1.6之后，加入自适应自旋adapative self spinning，JVM自己控制；升级重量级锁： 向操作系统升级资源，等待操作系统的调度，然后再映射会用户空间；</p>
+</blockquote>
+</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/008eGmZEgy1gpkusuo6fej31e40rqn1y.jpg" alt="锁标识"></p>
+<ul>
+<li>分代年龄<blockquote>
+<p>分代年龄占4位，即最大值为15，所以新生代中的对象在eden区和survior区进行15次转移，当达到最大值时，再转移到老年代</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="1-1-2-类型指针"><a href="#1-1-2-类型指针" class="headerlink" title="1.1.2 类型指针"></a>1.1.2 类型指针</h4><blockquote>
+<p>对象头的另外一部分是klass类型指针，即对象指向它的类元数据的指针，虚拟机通过这个指针来确定这个对象是哪个类的实例.</p>
+</blockquote>
+<h4 id="1-1-3-数组长度-只有数组对象有"><a href="#1-1-3-数组长度-只有数组对象有" class="headerlink" title="1.1.3 数组长度(只有数组对象有)"></a>1.1.3 数组长度(只有数组对象有)</h4><blockquote>
+<p>如果对象是一个数组, 那在对象头中还必须有一块数据用于记录数组长度.</p>
+</blockquote>
+<h3 id="1-2-实例数据"><a href="#1-2-实例数据" class="headerlink" title="1.2 实例数据"></a>1.2 实例数据</h3><blockquote>
+<p>实例数据部分就是存储对象的有效信息的，即在代码中定义的各种字段的内容，无论是从父类继承下来的，还是在子类中定义的，都需要存储。不过其顺序并不一定就是代码中定义的顺序，HostSpot虚拟机的策略是根据类型宽度来存储，例如double和long类型存储在一块儿，short和char存储在一块儿，在满足这个条件的前提下，父类中定义的变量会出现在子类定义的变量之前，即假设父类定义了一个double a = 3.0，子类定义了一个long b = 2，那么a和b会被存储在一起且a在b之前。</p>
+</blockquote>
+<h3 id="1-3-对齐填充"><a href="#1-3-对齐填充" class="headerlink" title="1.3 对齐填充"></a>1.3 对齐填充</h3><blockquote>
+<p>由于HotSpot VM的自动内存管理系统要求对象起始地址必须是8字节的整数倍，换句话说，就是对象的大小必须是8字节的整数倍。而对象头部分正好是8字节的倍数（1倍或者2倍），因此，当对象实例数据部分没有对齐时，就需要通过对齐填充来补全</p>
+</blockquote>
+<h3 id="1-4-对象的计算"><a href="#1-4-对象的计算" class="headerlink" title="1.4 对象的计算"></a>1.4 对象的计算</h3><ul>
+<li>在32位系统下，存放Class指针的空间大小是4字节，MarkWord是4字节，对象头为8字节。</li>
+<li>在64位系统下，存放Class指针的空间大小是8字节，MarkWord是8字节，对象头为16字节。</li>
+<li>64位开启指针压缩的情况下，存放Class指针的空间大小是4字节，MarkWord是8字节，对象头为12字节。数组长度4字节+数组对象头8字节(对象引用4字节（未开启指针压缩的64位为8字节）+数组markword为4字节（64位未开启指针压缩的为8字节）)+对齐4=16字节</li>
+<li>静态属性不算在对象大小内。</li>
+</ul>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/03/03/rust/rust_%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" class="archive-article-date">
-  	<time datetime="2021-03-03T07:28:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-03</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/03/03/rust/rust_%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">Rust环境配置</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Rust//" class="article-tag-list-link color5">Rust</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/01/05/%E6%97%A5%E5%BF%97%E8%A7%84%E8%8C%83/" class="archive-article-date">
-  	<time datetime="2021-01-05T07:28:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/01/05/%E6%97%A5%E5%BF%97%E8%A7%84%E8%8C%83/">日志规范</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/规范文档//" class="article-tag-list-link color5">规范文档</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/01/05/other/1_01/" class="archive-article-date">
-  	<time datetime="2021-01-05T07:28:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/01/05/other/1_01/">那些人老板最器重</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/other//" class="article-tag-list-link color1">other</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
       
-        </div></section>
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
       
+
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/09/13/mysql/mysql%E6%80%BB%E7%BB%93(%E4%B8%80)/" class="archive-article-date">
-  	<time datetime="2020-09-13T03:03:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-13</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/09/13/mysql/mysql%E6%80%BB%E7%BB%93(%E4%B8%80)/">Mysql 总结（一）基础示意图</a>
-    </h1>
-  
+      </div>
+    </span>
+  </div>
+</div>
 
-        <div class="article-info info-on-right">
-          
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Mysql//" class="article-tag-list-link color1">Mysql</a>
-        		</li>
-      		
-		</ul>
-	</div>
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://hy-it.github.io/2019/12/05/java/class_1/" alt="微信分享二维码">
+    </div>
+</div>
 
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/08/15/api_security/" class="archive-article-date">
-  	<time datetime="2020-08-15T07:28:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-15</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2020/03/26/url_api/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          接口设计规范
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/08/15/api_security/">Http 接口安全设计分析</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/HTTP接口//" class="article-tag-list-link color2">HTTP接口</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+        
+    </div>
+</aside>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/07/05/distribute_lock/" class="archive-article-date">
-  	<time datetime="2020-07-05T07:28:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-05</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/07/05/distribute_lock/">分布式锁实现</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/分布式//" class="article-tag-list-link color4">分布式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/05/20/distributedTransactions-RabbitMQ/" class="archive-article-date">
-  	<time datetime="2020-05-20T07:28:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/05/20/distributedTransactions-RabbitMQ/">分布式事务-基于RabbitMQ的最终一致性实现方法</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/分布式//" class="article-tag-list-link color4">分布式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/04/05/auto_http/" class="archive-article-date">
-  	<time datetime="2020-04-05T07:28:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/05/auto_http/">基于Yapi+swagger的接口自动化搭建</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/接口自动化//" class="article-tag-list-link color1">接口自动化</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/04/01/mybatis-lesson-1/" class="archive-article-date">
-  	<time datetime="2020-04-01T07:28:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-01</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/01/mybatis-lesson-1/">mybatis 源码学习一 （SqlSession和SqlSessionFactory）</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/mybatis//" class="article-tag-list-link color3">mybatis</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/04/01/python-linux/" class="archive-article-date">
-  	<time datetime="2020-04-01T07:28:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-01</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/01/python-linux/">Centos7 系统Python 2.7.5 切换为Python3.6.3步骤</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="extend next" rel="next" href="/archives/page/2/">Next &amp;raquo;</a>
-    </nav>
   
 
 
@@ -582,8 +388,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
